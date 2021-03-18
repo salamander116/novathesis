@@ -1,0 +1,166 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% unt/facet/defaults.ldf
+%% UNT thesis configuration file
+%%
+%% Customization for FACET-UNT (strings and cover)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{NT LOADING FILE unt/facet/defaults.ldf}
+
+% Univesity
+\university(es):={Universidad Nacional de Tucumán}
+\university(pt):={Universidade Nacional de Tucumán}
+\university(en):={National University of Tucumán}
+\university(fr):={National University of Tucumán}
+\university(it):={National University of Tucumán}
+
+% Faculty / School
+\school(es):={Facultad de Ciencias Exactas y Tecnología}
+\school(pt):={Faculdade de Ciências Exatcas e Tecnologia}
+\school(en):={School of Exact Science and Technology}
+\school(fr):={School of Exact Science and Technology}
+\school(it):={School of Exact Science and Technology}
+
+% Comiittee printing order
+\committeeorder(all):={c,r,m}% 
+
+% Autor
+\assocarray{authorstr}
+\authorstr(es,m):={Autor}
+\authorstr(es,f):={Autora}
+
+
+
+% Cover background images
+\thesiscover(phd,front):={}
+\thesiscover(phdplan,front):={}
+\thesiscover(phdprop,front):={}
+\thesiscover(msc,front):={cover-msc-std}
+\thesiscover(mscplan,front):={}
+\thesiscover(bsc,front):={}
+\thesiscover(plain,front):={}
+\thesiscover(phd,cdfront):={}
+\thesiscover(phd,cdinlay):={}
+\thesiscover(phdplan,cdfront):={}
+\thesiscover(phdplan,cdinlay):={}
+\thesiscover(phdprop,cdfront):={}
+\thesiscover(phdprop,cdinlay):={}
+\thesiscover(msc,cdfront):={}
+\thesiscover(msc,cdinlay):={}
+\thesiscover(mscplan,cdfront):={}
+\thesiscover(mscplan,cdinlay):={}
+\thesiscover(bsc,cdfront):={}
+\thesiscover(bsc,cdinlay):={}
+\thesiscover(plain,cdfront):={}
+\thesiscover(plain,cdinlay):={}
+
+% Spine info
+\spine(logo):={logoUNT}
+\spine(author):={\theauthorshortname}
+\spine(title):={\thetitle}
+\spine(year):={\thentdateyear}
+
+% Set margins for "normal" pages
+\margin(screen,top):={3.5cm}
+\margin(screen,bottom):={2.5cm}
+\margin(screen,left):={3.0cm}
+\margin(screen,right):={3.0cm}
+\margin(paper,top):={3.5cm}
+\margin(paper,bottom):={2.5cm}
+\margin(paper,left):={2.5cm}
+\margin(paper,right):={3.5cm}
+
+% Set margins for cover pages
+\margin(phd,top):={3.9cm}
+\margin(phd,bottom):={1.4cm}
+\margin(phd,left):={5.5cm}
+\margin(phd,right):={2.5cm}
+\margin(phdplan,top):={3.9cm}
+\margin(phdplan,bottom):={1.4cm}
+\margin(phdplan,left):={5.5cm}
+\margin(phdplan,right):={2.5cm}
+\margin(phdprop,top):={3.9cm}
+\margin(phdprop,bottom):={1.4cm}
+\margin(phdprop,left):={5.5cm}
+\margin(phdprop,right):={2.5cm}
+\margin(msc,top):={5.5cm}
+\margin(msc,bottom):={2cm}
+\margin(msc,left):={4.5cm}
+\margin(msc,right):={3.3cm}
+\margin(mscplan,top):={4.0cm}
+\margin(mscplan,bottom):={1.3cm}
+\margin(mscplan,left):={4.5cm}
+\margin(mscplan,right):={3.3cm}
+\margin(bsc,top):={4.0cm}
+\margin(bsc,bottom):={1.3cm}
+\margin(bsc,left):={4.5cm}
+\margin(bsc,right):={3.3cm}
+\margin(plain,top):={4.0cm}
+\margin(plain,bottom):={1.3cm}
+\margin(plain,left):={4.5cm}
+\margin(plain,right):={3.3cm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NOVA guidelines:
+% The pages should be numbered consecutively at the bottom centre of the
+% page.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makepagestyle{novathesis@myvf} 
+\makeoddfoot{novathesis@myvf}{}{\thepage}{} 
+\makeevenfoot{novathesis@myvf}{}{\thepage}{} 
+\makeheadrule{novathesis@myvf}{\textwidth}{\normalrulethickness} 
+\makeevenhead{novathesis@myvf}{\small\textsc{\leftmark}}{}{} 
+\makeoddhead{novathesis@myvf}{}{}{\small\textsc{\rightmark}}
+\pagestyle{novathesis@myvf}
+%
+%\frenchspacing
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Draw the cover page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\AtBeginCover{%
+  \ifxeorlua{\setmainfont[Ligatures=TeX]{TeX Gyre Heros}}{\fontfamily{phv}}%
+}
+
+% % Title of Dissertation
+\ntaddtocover[vspace=0cm]{%
+  \fontsize{18}{18}\selectfont
+  \textbf{\thecovertitle}
+}
+
+% Author name
+\ntaddtocover[vspace=3cm]{%
+  \ntcoverbackground
+  \fontsize{14}{14}\selectfont
+  \textbf{\theauthorstr(\option{/novathesis/coverlang},\theauthorgender): \theauthorname}
+}
+
+% Degree
+\ntaddtocover[vspace=1.5cm]{%
+  \fontsize{12}{12}\selectfont
+  \thepresentationtext
+}
+% Advisers
+\ntaddtocover[vspace=1cm]{%
+  \fontsize{12}{12}\selectfont
+  \ntprintadvisers
+}
+
+% Committee — only print the committee for the main classes
+\ntaddtocover[align=r, vspace=1cm]{%
+  \fontsize{10}{10}\selectfont%
+  \ntprintcommittee%
+}
+
+% Date
+\ntaddtocover[vspace=3.5cm  ]{%
+  \fontsize{11}{11}\selectfont
+  \ifdraftdoc
+    \textbf{DRAFT: \today}
+  \else
+    \textbf{\thentdatemonth, \thentdateyear}
+  \fi
+}
