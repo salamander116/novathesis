@@ -1,0 +1,73 @@
+  \newsavebox{\backcoverbox}%
+  \setbox\backcoverbox=\vbox\bgroup%
+      \@nt@printthecover{back}%
+  \egroup%
+  \newsavebox{\frontcoverbox}%
+  \setbox\frontcoverbox=\vbox\bgroup%
+      \@nt@printthecover{1}%
+  \egroup%
+  \newsavebox{\spinebox}%
+  \setbox\spinebox=\vbox\bgroup%
+      \ntprintspine[trim]%
+  \egroup%
+  \clearpage
+  \newlength{\newwidth}%
+  \newlength{\newheight}%
+  \setlength{\newwidth}{\dimexpr 2\paperwidth+\novathesis@spinewidth}%
+  \setlength{\newheight}{\paperheight}%
+  % \setstocksize{\paperheight}{2\paperwidth+\novathesis@spinewidth}
+  %   \settrimmedsize{\stockheight}{\stockwidth}{*}%
+  %   \setlrmarginsandblock{0pt}{0pt}{*}%
+  %   \setulmarginsandblock{0pt}{*}{1}%
+  %   \setheadfoot{0pt}{0pt}%
+  %   \setheaderspaces{0pt}{*}{*}%
+  %   \checkandfixthelayout[fixed]%
+  %   \ifluatex%
+  %       \pagewidth=\stockwidth% \pageheight=3in
+  %   \else%
+  %       \pdfpagewidth=\stockwidth% \pdfpageheight=3in
+  %   \fi%
+  \pgfsys@papersize{\newwidth}{\newheight}
+  \setlength{\headheight}{0pt}
+  \setlength{\headsep}{0pt}
+  \setlength{\footskip}{0pt}
+  \setulmarginsandblock{0pt}{0pt}{*}%
+  \setlrmarginsandblock{0pt}{0pt}{*}%
+  \checkandfixthelayout%
+  %
+  % \setlength{\uppermargin}{0pt}
+  % \setlength{\topmargin}{0pt}
+  % \setlength{\textheight}{\newheight}
+  % \setlength{\oddsidemargin}{0pt}
+  % \setlength{\spinemargin}{0pt}
+  % \setlength{\newheight}{0pt}
+  % \setlength{\marginparwidth}{0pt}
+  % \setlength{\marginparsep}{0pt}
+  %   \checkandfixthelayout%
+    \noindent%
+    \begin{minipage}{21cm}
+        \usebox{\backcoverbox}%
+    \end{minipage}%
+    % \rule{\novathesis@spinewidth}{10cm}%
+    \begin{minipage}{\novathesis@spinewidth}
+        \usebox{\spinebox}%
+    \end{minipage}
+    \begin{minipage}{21cm}
+        \usebox{\frontcoverbox}%
+    \end{minipage}%
+    % \fbox{\usebox{\frontcoverbox}}%
+    % \begin{minipage}{21cm}
+    %     \usebox{\frontcoverbox}%
+    % \end{minipage}%
+    % \begin{minipage}{\novathesis@spinewidth}
+    %     \usebox{\spinebox}%
+    % \end{minipage}%
+    % \begin{tikzpicture}[remember picture, overlay]
+    %     % \node[inner sep=0] at (current page.west) {\usebox{\backcoverbox}};
+    %     \node[inner sep=0,yshift=4.25mm,anchor=west] at (current page.north east) {\fbox{\usebox{\spinebox}}};
+    %     \node[inner sep=0,yshift=4.25mm,anchor=west] at (current page.north east) {\fbox{\usebox{\frontcoverbox}}};
+    %     % \node[inner sep=0] at (current page.east) {\usebox{\frontcoverbox}};
+    % \end{tikzpicture}%
+    % % \debuggrid%
+    \clearpage
+}
