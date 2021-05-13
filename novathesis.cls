@@ -875,6 +875,7 @@
 \newcommand{\@ntprintcover@i}[1]{%
   % #1 = cover ID (major-minor)
   \bgroup
+    \options{/@ntcoveropts/coverID=#1}
     \def\@nt@covernumber{#1}%
     \ifaadefined{thesiscover}(\option{/novathesis/docdegree},#1,textcolor)%
         {\color{\thethesiscover(\option{/novathesis/docdegree},#1,textcolor)}}{}
@@ -1020,6 +1021,8 @@
                           , N-1={}
                           , N-2=\thebackcoverstring(\option{/novathesis/coverlang})
                           , spine=\thespinestring(\option{/novathesis/coverlang})}
+  % The cover ID, e.g., 1-1, 1-2, 2-1, N-2
+  , coverID/.new value,
   % letter to macro for horizontal alignment
   , alignmap/.new choice={c=\centering,l=\raggedright,r=\raggedleft}
   % filters / conditional printing
@@ -1062,7 +1065,9 @@
   % Typeset contents in a box
   \@nt@makeboxwithcoverelement@iii{#1}{#2}{\@nt@coverelement}%
   \noindent%
-  \hspace*{\option{/@ntcoveropts/hspace}}%
+  \IfInteger{\option{/@ntcoveropts/hspace}}%
+    {\hskip 0pt plus \option{/@ntcoveropts/hspace}fill}%
+    {\hspace*{\option{/@ntcoveropts/hspace}}}%
   \iftoggle{/novathesis/debugcover}{% If in debug mode surround element in box
     \setlength{\fboxsep}{0pt}\hspace*{-\fboxrule}\vspace*{-\fboxrule}%
     \fbox{\usebox{\@nt@coverelement}}%
@@ -1077,7 +1082,7 @@
   \defifundef{\@mkcvelemwidth}{\newlength}%
   \ifoptionblank{/@ntcoveropts/width}%
     {\setlength{\@mkcvelemwidth}{\dimexpr\linewidth-\option{/@ntcoveropts/hspace}\relax}}%
-    {\option{/@ntcoveropts/width}}%
+    {\setlength{\@mkcvelemwidth}{\option{/@ntcoveropts/width}}}%
   \ifoptionblank{/@ntcoveropts/height}%
     {}%
     {\edefoption{/@ntcoveropts/height}\@mkcvelemheight}%
@@ -1219,7 +1224,8 @@
 \newcommand{\ntprintadvisers}[1][0.90]{%
   % \begin{minipage}{#1\textwidth}
   % #1=Percentage of \textwidth used by the advisers list
-  \begin{tabularx}{#1\textwidth}{@{}rX@{}}%
+  \providecommand*\@ntadviserscolspec{@{}rX@{}}%
+  \expandnext{\begin{tabularx}{#1\textwidth}}{\adviserscolspec}%{@{}rX@{}}%
   \forcsvlist{\@nt@printadvisergroup}{adviser,coadviser}%
   \end{tabularx}%
   % \end{minipage}

@@ -1,0 +1,315 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ulisboa/fmv/schl-defaults.ldf
+%% NOVA thesis configuration file
+%%
+%% Customization for EC-UMINHO (strings and cover)
+%%
+%%      This customization had the collaboration and support
+%%      from Bruno Pereira (b-pereira @ github), who built
+%%      the initial support in a fork of version 4.x
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{NT FILE ulisboa/fmv/schl-defaults.ldf}
+
+%-----------------------------------------------------------------
+% Remainder customization
+%-----------------------------------------------------------------
+% Faculty / School
+\school(pt):={Faculdade de Medicina Veterinária}
+\school(en):={Veterinary Medicine School}
+\school(es):={Facultad de Medicina Veterinaria}
+\school(fr):={École de Médecine Vétérinaire}
+\school(it):={Scuola di Medicina Veterinaria}
+\school(de):={Veterinärmedizinische Schule}
+
+\school(logo,RGB):={logo-fmv-ul-cor}
+\school(logo,BW):={logo-fmv-ul-PB}
+
+%-----------------------------------------------------------------
+% memoir customization
+%-----------------------------------------------------------------
+\ntmemoirsetup{openany}         % Two print single paged
+
+%-----------------------------------------------------------------
+% novathesis customization
+%-----------------------------------------------------------------
+\ntsetup{secondcover=true}
+\ntsetup{printcopyright=false}
+% \ntsetup{statement=true}
+
+% --------------------------------------------------------
+% PRINT ORDER FOR frontmatter AND mainmatter
+\ntsetprintorder{frontmatter}{
+  statement,       % The statement page
+  acknowledgements,% (*) Print the acknowledgments
+  quote,           % (*) Print the quote
+  abstracts,       % Print abstracts in multiple languages.
+  alllistof,       % Print all the listof defined in “7_list_of.tex”
+}
+
+% \ntsetprintorder{mainmatter}{
+%   chapters,        % Print document chapters
+%   bib,             % Print the bibliography.  Change to
+%                    %    “bib[title=⟨title⟩]” to redefine the title!
+%   appendices,      % Print appendices, if any!
+%   annexes,         % Print annexes, if any!
+% }
+
+
+% \commastring(pt):={\\}
+% \commastring(en):={\\}
+% \commastring(fr):={\\}
+% \commastring(it):={\\}
+% \commastring(es):={\\}
+% \commastring(de):={\\}
+%
+% \andstring(pt):={\\}
+% \andstring(en):={\\}
+% \andstring(fr):={\\}
+% \andstring(it):={\\}
+% \andstring(es):={\\}
+% \andstring(de):={\\}
+
+
+
+%-----------------------------------------------------------------
+% local strings
+%-----------------------------------------------------------------
+\assocarray{ofstr}
+% \ofstr(pt):={ de }
+\ofstr(pt):={, }
+\ofstr(en):={, }
+
+\assocarray{doctype}
+\doctype(pt,phd):={Tese de Doutoramento em}
+\doctype(en,phd):={Doctorate Thesis in}
+\doctype(pt,msc):={Dissertação de Mestrado em}
+\doctype(en,msc):={Master Thesis in}
+
+% \assocarray{advisersrt}
+% \advisersrt(pt):={Trabalho efetuado sob a orientação de:}
+% \advisersrt(en):={Word developed under the supervision of:}
+%
+% \assocarray{placestr}
+% \placestr(pt):={Local}
+% \placestr(en):={Place}
+%
+% \assocarray{datestr}
+% \datestr(pt):={Data}
+% \datestr(en):={Date}
+
+
+%-----------------------------------------------------------------
+% Abstracts
+%-----------------------------------------------------------------
+\NTAddToHook{abstract/pre}{%
+  \let\oldchapterheadstart=\chapterheadstart%
+  % \preto{\chapterheadstart}{{\noindent\newsgottbf\Large\thedoctitle(\option{/@nt/currentlang},main)}}%
+  \preto{\chapterheadstart}{\vspace*{-2cm}}
+}
+\NTAddToHook{abstract/mid}{%
+  % \let\oldchapterheadstart=\chapterheadstart%
+  {{\noindent\Large\thedoctitle(\option{/@nt/currentlang},main)}\\[1ex]}%
+}
+\NTAddToHook{abstract/post}{%
+  \let\chapterheadstart=\oldchapterheadstart%
+}
+
+\NTAddToHook{mainmatter/post}{%
+  \counterwithout{figure}{chapter}%
+  \counterwithout{table}{chapter}%
+}
+
+
+
+%-----------------------------------------------------------------
+% Remainder customization
+%-----------------------------------------------------------------
+
+% Comiittee printing order
+\committeeorder(all):={c,r,m}%  
+
+% Cover background images
+% \thesiscover(phd,1-1,textcolor):={white}
+% \thesiscover(phd,1-1,bgcolor):={uminhoGREY}
+% \thesiscover(phd,1-2,bgcolor):={uminhoRED}
+% \thesiscover(phd,2-1,textcolor):={uminhoGREY}
+% \thesiscover(phd,N-1,bgcolor):={uminhoRED}
+% \thesiscover(phd,N-2,bgcolor):={uminhoGREY}
+% \thesiscover(msc,1-1,textcolor):={uminhoGREY}
+% \thesiscover(msc,1-1,bgcolor):={white}
+% \thesiscover(msc,1-2,bgcolor):={uminhoGREY}
+% \thesiscover(msc,2-1,textcolor):={uminhoGREY}
+% \thesiscover(msc,N-1,bgcolor):={uminhoGREY}
+% \thesiscover(msc,N-2,bgcolor):={white}
+
+\thesiscover(phd,1-1,image):={cover-debug}
+% \thesiscover(phdplan,front,image):={cover-phd-std}
+% \thesiscover(phdprop,front,image):={cover-phd-std}
+% \thesiscover(msc,front,image):={capa-debug.pdf}
+% \thesiscover(mscplan,front,image):={cover-msc-std}
+% \thesiscover(bsc,front,image):={cover-bsc-std}
+% \thesiscover(plain,front,image):={cover-plain-std}
+% \thesiscover(phd,cdfront,image):={cd-cover-phd}
+% \thesiscover(phd,cdinlay,image):={cd-inlay-phd}
+% \thesiscover(phdplan,cdfront,image):={cd-cover-phd}
+% \thesiscover(phdplan,cdinlay,image):={cd-inlay-phd}
+% \thesiscover(phdprop,cdfront,image):={cd-cover-phd}
+% \thesiscover(phdprop,cdinlay,image):={cd-inlay-phd}
+% \thesiscover(msc,cdfront,image):={cd-cover-msc}
+% \thesiscover(msc,cdinlay,image):={cd-inlay-msc}
+% \thesiscover(mscplan,cdfront,image):={cd-cover-msc}
+% \thesiscover(mscplan,cdinlay,image):={cd-inlay-msc}
+% \thesiscover(bsc,cdfront,image):={cd-cover-msc}
+% \thesiscover(bsc,cdinlay,image):={cd-inlay-msc}
+% \thesiscover(plain,cdfront,image):={cd-cover-msc}
+% \thesiscover(plain,cdinlay,image):={cd-inlay-msc}
+
+% Spine info
+% \spine(logo,university):={\theuniversity(logo,vert)}
+% \spine(logo,school):={\theschool(logo,RGB)}
+% \spine(author):={\theauthorshortname}
+% \spine(title):={\thedoctitle(\option{/novathesis/coverlang},main)}
+% \spine(year):={\thentdateyear}
+
+% \spine(top):={9cm}
+% \spine(margin):={3mm}
+% \spine(font):={}
+
+% Set margins for "normal" pages
+\margin(screen,top):={3.5cm}
+\margin(screen,bottom):={2.5cm}
+\margin(screen,left):={2.5cm}
+\margin(screen,right):={2.5cm}
+\margin(paper,top):={3.5cm}
+\margin(paper,bottom):={2.5cm}
+\margin(paper,left):={2.5cm}
+\margin(paper,right):={2.5cm}
+
+% Set margins for cover pages
+% \margin(phd,top):={3.67cm}
+\margin(phd,top):={2.5cm}
+\margin(phd,bottom):={1.0cm}
+\margin(phd,left):={2.5cm}
+\margin(phd,right):={2.5cm}
+\margin(phdplan,top):={2.5cm}
+\margin(phdplan,bottom):={1.0cm}
+\margin(phdplan,left):={2.5cm}
+\margin(phdplan,right):={2.5cm}
+\margin(phdprop,top):={2.5cm}
+\margin(phdprop,bottom):={1.0cm}
+\margin(phdprop,left):={2.5cm}
+\margin(phdprop,right):={2.5cm}
+\margin(msc,top):={2.5cm}
+\margin(msc,bottom):={1.0cm}
+\margin(msc,left):={2.5cm}
+\margin(msc,right):={2.5cm}
+\margin(mscplan,top):={2.5cm}
+\margin(mscplan,bottom):={1.0cm}
+\margin(mscplan,left):={2.5cm}
+\margin(mscplan,right):={2.5cm}
+\margin(bsc,top):={2.5cm}
+\margin(bsc,bottom):={1.0cm}
+\margin(bsc,left):={2.5cm}
+\margin(bsc,right):={2.5cm}
+\margin(plain,top):={2.5cm}
+\margin(plain,bottom):={1.0cm}
+\margin(plain,left):={2.5cm}
+\margin(plain,right):={2.5cm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define your own pagestyle if you want to…
+% Leave the "\AtEndPreamble{…}"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Draw the cover page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NTAddToHook{cover/1-1/pretext}{%
+  \pagecolor{white}%
+  \ifxeorlua{\setmainfont[Ligatures=TeX]{Helvetica}}{\fontfamily{phv}}%
+  \color{blue}%
+}
+\NTAddToHook{cover/2-1/pretext}{%
+  \ifxeorlua{\setmainfont[Ligatures=TeX]{Helvetica}}{\fontfamily{phv}}%
+  \color{blue}%
+}
+
+
+% University and School logos
+\ntaddtocover[vspace=1.5mm,align=c,height=3cm,inalign=t]{1-1,2-1}{%
+  % \includegraphics[height=2.5cm]{\theuniversity(logo,horiz)}%
+  \includegraphics[height=3cm]{\theschool(logo,BW)}%
+}
+
+% University and School names
+\ntaddtocover[vspace=1.15cm,align=c]{1-1,2-1}{%
+  \fontsize{14}{14}\selectfont%
+  % \addfontfeature{LetterSpace=2.5}%
+  \textbf{\MakeTextUppercase{\theuniversity(\option{/novathesis/coverlang})}}%
+  \\[0.4cm]%
+  \fontsize{16}{16}\selectfont%
+  \theschool(\option{/novathesis/coverlang})%
+}
+
+% Title of Dissertation
+\ntaddtocover[vspace=3.5cm,align=c,]{1-1,2-1}{%
+  \fontsize{14}{14}\selectfont%
+  % \addfontfeature{LetterSpace=2.9}%
+  \textbf{\thedoctitle(\option{/novathesis/coverlang},main,cover,caps)}
+}
+
+% Author name
+\ntaddtocover[vspace=0.7cm,align=c]{1-1,2-1}{%
+  \fontsize{14}{13}\selectfont%
+  % \addfontfeature{LetterSpace=3.5}%
+  \MakeTextUppercase{\theauthorname}%
+}
+
+% Degree info
+\ntaddtocover[vspace=1,align=l]{1-1,2-1}{%
+  \fontsize{14}{14}\selectfont%
+  \thedoctype(\option{/novathesis/coverlang},\option{/novathesis/docdegree})%
+  % \\%
+  \thedegreename(\option{/novathesis/coverlang})%
+  % \\%
+  % \thespecialization(\option{/novathesis/coverlang})%
+}
+
+% % Committee — only print the committee for the main classes
+\ntaddtocover[vspace=1,align=l,width=0.45\textwidth,newpar=false]{1-1,2-1}{%
+  \null%\option{/@ntcoveropts/coverID}%
+  \ifoptionequal{/@ntcoveropts/coverID}{2-1}{%
+    \fontsize{10}{10}\selectfont%
+    \ntprintcommittee[1]%
+  }{}%
+}
+
+% Advisers
+\ntaddtocover[align=l,width=0.45\textwidth,hspace=1]{1-1,2-1}{%
+  \fontsize{12}{12}\selectfont%
+  \ntprintadvisers[1]%
+}
+%
+% % Advisers
+% \ntaddtocover[vspace=0,align=l]{2-1}{%
+%   \fontsize{14}{14}\selectfont%
+%   \theadvisersrt(\option{/novathesis/coverlang})\\%
+%   \textbf{\ntprintadvisersaslist}%
+% }
+%
+% % Committee — only print the committee for the main classes
+% % \ntaddtocover[align=r, vspace=1]{1-1}{%
+% %   \ifphddoc{\color{\phdtextcolor}}{\color{\msctextcolor}}%
+% %   \fontsize{10}{10}\selectfont%
+% %   \ntprintcommittee%
+% % }
+%
+% Date
+\ntaddtocover[vspace=2]{1-1,2-1}{%
+  \fontsize{11}{11}\selectfont%
+  \textbf{\thentdatemonth, \thentdateyear}
+}

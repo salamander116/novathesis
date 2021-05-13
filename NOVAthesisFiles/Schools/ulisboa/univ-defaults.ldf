@@ -13,3 +13,6 @@
 \university(en):={University of Lisbon}
 \university(fr):={University of Lisbon}
 \university(it):={University of Lisbon}
+
+\university(logo,horiz):={ULISBOA_HORIZONTAL_RGB}
+\university(logo,vert):={ULISBOA_VERTICAL_RGB}
